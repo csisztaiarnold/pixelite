@@ -7,6 +7,7 @@ Currently just a very early proof of concept. Still a lot to do:
 
 - grid
 - color clash handling
+- undo
 - different graphics modes
 - import/export
 - brushes
