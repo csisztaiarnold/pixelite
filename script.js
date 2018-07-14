@@ -20,15 +20,6 @@ $(document).ready(function(){
         '108,94,181',
         '149,149,149'
     ];
-
-    var i;
-    var paletteHtml = '';
-    for (i = 0; i < palette.length; ++i) {
-        paletteHtml += '<div class="color' + (i == 0 ? " active" : "" ) + '" data-rgb="' + palette[i] + '" style="background-color: rgba(' + palette[i] + ',1)"></div>';
-    }
-
-    $('#palette').append(paletteHtml);
-
     var canvas = document.getElementById("canvas");
     var previewCanvas = document.getElementById("previewCanvas");
     var ctx = canvas.getContext("2d");
@@ -40,8 +31,10 @@ $(document).ready(function(){
     var down = false;
     var pixelColor = "0,0,0";
 
+    // Zoom level indicator
     $('#zoom-level').val(zoomFactor);
 
+    // Adjust canvas side depending on window size
     $(window).on('resize load', function(){
         changeCanvasSize();
     });
@@ -49,6 +42,15 @@ $(document).ready(function(){
     function changeCanvasSize() {
         $('#container').css('width', $(window).width() + 'px').css('height', $(window).height() + 'px');
     }
+
+    // Color palette div
+    var i;
+    var paletteHtml = '';
+    for (i = 0; i < palette.length; ++i) {
+        paletteHtml += '<div class="color' + (i == 0 ? " active" : "" ) + '" data-rgb="' + palette[i] + '" style="background-color: rgba(' + palette[i] + ',1)"></div>';
+    }
+
+    $('#palette').append(paletteHtml);
 
     // Load an initial image into the background
     var img = new Image();
@@ -76,6 +78,10 @@ $(document).ready(function(){
         refreshPreviewCanvas();
     });
 
+    $('#canvas').on('hover', function() {
+
+    });
+
     // Mousevents
     $(canvas).bind({
         mousedown : function(){
@@ -83,14 +89,24 @@ $(document).ready(function(){
             drawPixel(event);
         },
         mousemove : function(){
+            var currentCoordinates = returnCurrentCoordinates(event);  
+            $('#coor-x').val(currentCoordinates[0]);
+            $('#coor-y').val(currentCoordinates[1]);            
             if(!down) return;
             drawPixel(event);
-            refreshPreviewCanvas()
+            refreshPreviewCanvas();
         },
         mouseup : function(){
             down = false;
         }
     });
+
+    // Update coordinates 
+    function returnCurrentCoordinates(event) {
+        var x = Math.floor((event.clientX + container.scrollLeft ) / zoomFactor);
+        var y = Math.floor((event.clientY + container.scrollTop ) / zoomFactor);
+        return [x,y];
+    }
 
     // Copying the main canvas into 
     function refreshPreviewCanvas() {
@@ -99,11 +115,9 @@ $(document).ready(function(){
     }
 
     function drawPixel(event) {
-        var offset = $('#container').offset();
         // Calculate the position of the mouse
-        var x = Math.floor((event.clientX + container.scrollLeft ) / zoomFactor );
-        var y = Math.floor((event.clientY + container.scrollTop ) / zoomFactor );
-        createPixel(x, y, pixelColor);
+        var currentCoordinates = returnCurrentCoordinates(event);  
+        createPixel(currentCoordinates[0], currentCoordinates[1], pixelColor);
         refreshPreviewCanvas();
     }
 
@@ -111,14 +125,6 @@ $(document).ready(function(){
         ctx.putImageData( id, pixelX, pixelY );
         ctx.fillStyle = "rgba(" + color + ",1)";
         ctx.fillRect( pixelX, pixelY, 1, 1 );
-    }
-
-    function getMousePos(canvas, evt) {
-        var rect = canvas.getBoundingClientRect();
-        return {
-            x: evt.clientX - rect.left,
-            y: evt.clientY - rect.top
-        };
     }
 
     // Canvas Zoom
