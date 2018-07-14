@@ -155,7 +155,7 @@ $(document).ready(function(){
 
     // Disable vertical scroll on mousewheel so the zoom works fine
     $(window).on("wheel mousewheel", function(event){
-        if(e.originalEvent.deltaY > 0) {
+        if(event.originalEvent.deltaY > 0) {
             event.preventDefault();
             return;
         } else if (event.originalEvent.wheelDeltaY < 0) {
