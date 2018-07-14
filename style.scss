@@ -118,4 +118,18 @@ body {
             text-align: center;
         }
     }
+
+    #current-colors {
+        display: block;
+        overflow: auto;
+
+        .color {
+            width: 20px;
+            height: 20px;
+            display: block;
+            float: left;
+            border: 1px solid rgba(0,0,0,1);
+            border-radius: 2px;    
+        }        
+    }
 }
