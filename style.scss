@@ -12,6 +12,17 @@ body {
         -ms-interpolation-mode: nearest-neighbor;   /* IE8+                           */
     }
 
+    #char-overlay {
+        position: absolute;
+        z-index: 500;
+        width: 20px;
+        height: 20px;
+        top: 200px;
+        left: 200px;
+        border: 1px dashed rgba(255,255,255,0.2);
+        pointer-events: none;
+    }
+
     #container {
         overflow: scroll;
     }

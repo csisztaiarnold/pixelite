@@ -94,6 +94,8 @@ $(document).ready(function(){
             $('#charcoor-x').val(currentCharCoordinates[0] + 1);
             $('#charcoor-y').val(currentCharCoordinates[1] + 1);                      
 
+            $('#char-overlay').css('top', (currentCharCoordinates[1] * zoomFactor * 8) + 'px').css('left', (currentCharCoordinates[0] * zoomFactor * 8) + 'px').css('width', (zoomFactor * 8 - 1) + 'px').css('height', (zoomFactor * 8 - 1) + 'px');
+
             var uniqueColors = returnUniqueColorsFromCurrentCharbyCharCoordinates(currentCharCoordinates);
             if(uniqueColors.length == 1){     
                 uniqueColors[1] = uniqueColors[0]; // If there's only one color, the second color is the same   
@@ -124,6 +126,7 @@ $(document).ready(function(){
         return [x,y];
     }
 
+    // Returns the unique colors from the current char
     function returnUniqueColorsFromCurrentCharbyCharCoordinates(currentCharCoordinates){
         // Get the up left x and y coordinate of the char
         var charStartX = currentCharCoordinates[0] * 8;
@@ -134,7 +137,7 @@ $(document).ready(function(){
         return uniqueColors;
     }
 
-    // Copying the main canvas into 
+    // Copying the main canvas into the preview
     function refreshPreviewCanvas(){
         var destCtx = previewCanvas.getContext('2d');
         destCtx.drawImage(canvas, 0, 0);    
