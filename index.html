@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script src="jquery-3.3.1.min.js"></script>
+    <script src="jquery-ui.min.js"></script>
+    <script src="script.js"></script>
+    <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+<div style="overflow: scroll" id="container">
+    <div id="palette"></div>
+    <div id="options-container">
+        <label>Select an image:</label>
+        <select>
+            <option value="img1">Anima Et Animus</option>
+            <option value="img2">Joe's 136 Colors LSD Trip</option>
+            <option value="img3">Tamed</option>
+            <option value="img4">The King Lives!</option>
+            <option value="img5">Transcendence</option>
+        </select>
+        <div id="clear">Clear with selected color</div>
+        <label>Zoom level:</label>
+        <input id="zoom-level" type="text" value="" disabled />
+        <label><strong>Help:</strong></label>
+        <ul>
+            <li>Move main canvas with cursor buttons or scrollbars</li>
+            <li>Mouseweel on canvas: zoom in/out</li>
+            <li>You could drag the modal windows to move them away</li>
+            <li>Click on preview window to activate, and then zoom in/out activated preview with mousewheel</li>
+            <li>Save with right click > Save As...</li>
+        </ul>
+        <br />
+        Graphics by Arnold "Jailbird" Csisztai
+    </div>
+    <canvas id="canvas" width="320" height="200" style="background-color: #000000; zoom: 12;"></canvas>
+    <canvas id="previewCanvas" width="320" height="200" style="background-color: #000000;"></canvas>
+</div>
+
+</body>
+</html>

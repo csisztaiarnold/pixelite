@@ -1,0 +1,124 @@
+body {
+    padding: 0;
+    margin: 0;
+}
+
+canvas { 
+    image-rendering: optimizeSpeed;             /* STOP SMOOTHING, GIVE ME SPEED  */
+    image-rendering: -moz-crisp-edges;          /* Firefox                        */
+    image-rendering: -o-crisp-edges;            /* Opera                          */
+    image-rendering: -webkit-optimize-contrast; /* Chrome (and eventually Safari) */
+    image-rendering: pixelated;                 /* Chrome */
+    image-rendering: optimize-contrast;         /* CSS3 Proposed                  */
+    -ms-interpolation-mode: nearest-neighbor;   /* IE8+                           */
+}
+
+#container {
+    overflow: scroll;
+}
+
+#palette {
+    position: absolute;
+    top: 220px;
+    left: 10px;
+    z-index: 2000;
+    padding: 10px;
+    box-shadow: 0 0 5px #000;
+    background-color: #111;
+    border-radius: 2px;
+    cursor: move;    
+}
+
+#palette .color {
+    width: 20px;
+    height: 20px;
+    display: block;
+    float: left;
+    border: 1px solid rgba(0,0,0,1);
+    border-radius: 2px;    
+    cursor: pointer;     
+}
+
+#palette .color.active {
+    border: 1px dashed rgba(255,140,97,1);
+}
+
+#palette .color:nth-child(9) {
+    clear:both;
+}
+
+#canvas {
+}
+
+#previewCanvas {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    box-shadow: 0 0 5px #000;
+    cursor: move;
+    z-index: 1000;
+    border: 1px solid rgba(0,0,0,1);
+}
+
+#previewCanvas.active {
+    border: 1px solid rgba(255,255,255,0.4);
+}
+
+#options-container {
+    position: absolute;
+    top: 300px;
+    left: 10px;            
+    padding: 10px;
+    box-shadow: 0 0 5px #000;
+    background-color: #111;
+    border-radius: 2px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 11px;
+    color: #777;  
+    cursor: move;   
+    width: 200px;   
+}
+
+#options-container label {
+    display: block;
+    padding-bottom: 5px;
+    padding-top: 10px;
+    font-size: 12px;
+}
+
+#options-container label:first-child {
+    padding-top: 0;
+}
+
+#options-container select {
+    overflow: auto;
+    display: block;
+}
+
+#options-container #clear {
+    clear: both;
+    border-radius: 5px;
+    margin-top: 10px;
+    cursor: pointer;
+    background-color: #aa0000;
+    color: #fff;
+    display: inline-block;
+    padding: 3px 5px 3px 5px;
+}
+
+#options-container ul {
+    padding: 0 0 0 20px;
+    margin: 0;
+}
+
+#options-container ul li {
+    padding-bottom: 5px;
+}
+
+#options-container #zoom-level {
+    border: 0;
+    background-color: #333;
+    color: #888;
+    width: 40px;
+    text-align: center;
+}
