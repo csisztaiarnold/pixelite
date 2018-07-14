@@ -87,13 +87,14 @@ $(document).ready(function(){
         },
         mousemove : function(){
             var currentPixelCoordinates = returnCurrentPixelCoordinates(event);  
-            $('#coor-x').val(currentPixelCoordinates[0] + 1);
-            $('#coor-y').val(currentPixelCoordinates[1] + 1);
+            $('#coor-x').val(currentPixelCoordinates[0]);
+            $('#coor-y').val(currentPixelCoordinates[1]);
 
             var currentCharCoordinates = returnCurrentCharCoordinates(event);  
             $('#charcoor-x').val(currentCharCoordinates[0] + 1);
             $('#charcoor-y').val(currentCharCoordinates[1] + 1);                      
 
+            // Place a char overlay on the current char
             $('#char-overlay').css('top', (currentCharCoordinates[1] * zoomFactor * 8) + 'px').css('left', (currentCharCoordinates[0] * zoomFactor * 8) + 'px').css('width', (zoomFactor * 8 - 1) + 'px').css('height', (zoomFactor * 8 - 1) + 'px');
 
             var uniqueColors = returnUniqueColorsFromCurrentCharbyCharCoordinates(currentCharCoordinates);
@@ -149,13 +150,16 @@ $(document).ready(function(){
         var currentPixelCoordinates = returnCurrentPixelCoordinates(event);  
         var currentCharCoordinates = returnCurrentCharCoordinates(event);  
         var uniqueColors = returnUniqueColorsFromCurrentCharbyCharCoordinates(currentCharCoordinates);
+        var pixelIndexX = currentPixelCoordinates[0] - (currentCharCoordinates[0] * 8);
+        var pixelIndexY = currentPixelCoordinates[1] - (currentCharCoordinates[1] * 8);
+        var pixelIndex = pixelIndexX + (pixelIndexY * 8);
+
         // Todo: color replacement
         if(uniqueColors.length < 2 || pixelColor + ',255' == uniqueColors[0] || pixelColor + ',255' == uniqueColors[1]) {
-            console.log('Cool, we can put colors here.');
+            createPixel(currentPixelCoordinates[0], currentPixelCoordinates[1], pixelColor);
         } else {
-            console.log('No can do. Colorclash here.');
+            colorChange(currentCharCoordinates, pixelIndex, pixelColor);
         }
-        createPixel(currentPixelCoordinates[0], currentPixelCoordinates[1], pixelColor);
         refreshPreviewCanvas();
     }
 
@@ -164,6 +168,44 @@ $(document).ready(function(){
         ctx.putImageData( id, pixelX, pixelY );
         ctx.fillStyle = "rgba(" + color + ",1)";
         ctx.fillRect( pixelX, pixelY, 1, 1 );
+    }
+
+    // Check which pixel I want to change, get the color, and change it in the char 
+    function colorChange(currentCharCoordinates, pixelIndex, newColor) {
+        // Get the up left x and y coordinate of the char
+        var charStartX = currentCharCoordinates[0] * 8;
+        var charStartY = currentCharCoordinates[1] * 8;
+        // Dump the chardata into an array
+        var imgData = ctx.getImageData(charStartX,charStartY,8,8);
+        var i;
+        var n = 0;
+        var colorArray = [];
+        data = imgData.data;
+        for(i = 0; i < data.length; i++){
+            if(i % 4 == 0) {
+                colorArray[n] = data[i] + ',' + data[i+1] + ',' + data[i+2] + ',' + data[i+3];
+                n++;
+            } 
+        }
+        colorToChange = colorArray[pixelIndex];
+        for(i = 0; i < colorArray.length; i++) {
+            if(colorArray[i] == colorToChange){
+                colorArray[i] = pixelColor + ',255';
+            }
+        }
+        var colorData = [];
+        var n = 0;
+        $.each(colorArray, function( index, value ) {
+            var subarray = colorArray[index].split(',');
+            for(i = 0; i < subarray.length; i++) {
+                colorData[n] = subarray[i];
+                n++;
+            }
+        });
+        for (var i = 0; i < imgData.data.length; i++){
+            imgData.data[i] = colorData[i]
+        }
+        ctx.putImageData(imgData,charStartX,charStartY);
     }
 
     // All colors from char into an array, then return the uniques
@@ -190,6 +232,14 @@ $(document).ready(function(){
         $('#canvas').css('zoom', zoomFactor + wheel);
         zoomFactor = zoomFactor + wheel;
         $('#zoom-level').val(zoomFactor);
+        // Place a char overlay on the current char
+        var currentCharCoordinates = returnCurrentCharCoordinates(event);  
+        $('#char-overlay').css('top', (currentCharCoordinates[1] * zoomFactor * 8) + 'px').css('left', (currentCharCoordinates[0] * zoomFactor * 8) + 'px').css('width', (zoomFactor * 8 - 1) + 'px').css('height', (zoomFactor * 8 - 1) + 'px'); 
+        if(zoomFactor < 4) {
+            $('#char-overlay').css('background-color', 'rgba(255,255,255,0.1)');
+        } else {
+            $('#char-overlay').css('background', 'none');
+        }
     }
 
     // Activate-deactive preview window
