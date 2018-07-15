@@ -56,7 +56,7 @@ body {
     #zoom {
         position: fixed;
         top: 250px;
-        left: 220px;
+        left: 280px;
         z-index: 2500;
         padding: 0 5px 5px 5px;
         box-shadow: 0 0 5px #000;
@@ -85,33 +85,75 @@ body {
         top: 250px;
         left: 10px;
         z-index: 2000;
-        padding: 0 5px 5px 5px;
         box-shadow: 0 0 5px #000;
+        overflow: auto;
         background-color: #111;
         border-radius: 2px;
+        padding: 0 5px 5px 5px;
 
-        .color-container {
-            display: block;
-            overflow: auto;
-
-            .color {
-                width: 20px;
-                height: 20px;
+            .color-container {
                 display: block;
                 float: left;
-                border: 1px solid rgba(0,0,0,1);
-                border-radius: 2px;    
-                cursor: pointer;     
-            }
 
-            .color.active {
-                border: 1px dashed rgba(255,140,97,1);
-            }
+                .color {
+                    width: 20px;
+                    height: 20px;
+                    display: block;
+                    float: left;
+                    border: 1px solid rgba(0,0,0,1);
+                    border-radius: 2px;    
+                    cursor: pointer;     
+                }
 
-            .color:nth-child(9) {
-                clear:both;
+                .color.active {
+                    border: 1px dashed rgba(255,140,97,1);
+                }
+
+                .color:nth-child(9) {
+                    clear:both;
+                }
             }
-        }
+        
+            .color-indicators {
+                position: relative;
+                float: left;
+                margin-top: 5px;
+                margin-left: 10px;
+                display: block;
+                width: 40px;
+
+                .left-click {
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    width: 20px;
+                    height: 20px;
+                    display: block; 
+                    float: left;
+                    background: rgba(0,0,0,1);
+                    border-top: 1px solid rgba(255,255,255,0.2);
+                    border-left: 1px solid rgba(255,255,255,0.2);
+                    border-radius: 2px;
+                    z-index: 2010;
+
+                }
+
+                .right-click {
+                    position: absolute;
+                    top: 10px;
+                    left: 10px;
+                    width: 20px;
+                    height: 20px;
+                    display: block; 
+                    float: left;
+                    background: rgba(255,255,255,1);
+                    border-top: 1px solid rgba(255,255,255,0.2);
+                    border-left: 1px solid rgba(255,255,255,0.2);                
+                    border-radius: 2px;
+                    z-index: 2005;
+                }            
+            }
+    
     }
 
     #preview-canvas-container {
@@ -183,6 +225,16 @@ body {
 
             li {
                 padding-bottom: 5px;
+            }
+        }
+
+        .save-image-container {
+            text-align: center;
+            cursor: pointer;
+            padding-top: 5px;
+
+            img {
+                opacity: 0.7;
             }
         }
 

@@ -11,9 +11,17 @@
 </head>
 <body>
 <div style="overflow: scroll" id="container">
-    <div id="palette-container"><h1>Palette</h1><div class="color-container"><div id="palette"></div></div></div>
+    <div id="palette-container">
+        <h1>Palette</h1>
+        <div class="color-container"><div id="palette"></div></div>
+        <div class="color-indicators">
+            <div class="left-click" data-rgb="0,0,0"></div>
+            <div class="right-click" data-rgb="255,255,255"></div>
+        </div>
+    </div>
     <div id="options-container">
         <h1>Settings / Info</h1>
+        <div class="save-image-container"><img src="assets/save.svg" alt="Save Image" width="24" height="24" id="save-image" title="Save Image (image opens in new tab)" /></div>
         <div class="infogroup"><input type="checkbox" id="hires-limit" checked> <label for="hires-limit">Hi-res Limitations</label></div>
         <div class="infogroup"><label>X:</label> <span id="coor-x">0</span></div>
         <div class="infogroup"><label>Y:</label> <span id="coor-y">0</span></div>
@@ -37,7 +45,7 @@
                 <li>Move main canvas with cursor buttons or scrollbars</li>
                 <li>You could drag the modal windows to move them away</li>
                 <li>Click on preview window to activate, and then zoom in/out activated preview with mousewheel</li>
-                <li>Save with right click > Save As...</li>
+                <li>Save with the floppy icon (image opens in new tab)</li>
             </ul>
         </div>
         <br />

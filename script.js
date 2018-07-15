@@ -1,10 +1,16 @@
 $(document).ready(function(){
     
+    // Prevent accidental tab closing
     window.addEventListener("beforeunload", function (e) {
         var confirmationMessage = "Are you sure you want to leave the page?";
         e.returnValue = confirmationMessage;     // Gecko, Trident, Chrome 34+
         return confirmationMessage;              // Gecko, WebKit, Chrome <34
     });
+
+    // Context menu is for fools
+    document.addEventListener('contextmenu', function(e) {
+        e.preventDefault();
+    }, false);
 
     // Draggable settings for the modal windows
     $("#preview-canvas-container, #palette-container, #options-container, #zoom").draggable({
@@ -41,7 +47,8 @@ $(document).ready(function(){
     var id = ctx.createImageData(1,1); // Pixel size
     var d = id.data; // Pixel data
     var down = false; // Is mouse clicked?
-    var pixelColor = "0,0,0"; // Initial pixel color
+    var pixelColor = "0,0,0"; // Initial primary pixel color
+    var secondaryPixelColor = "255,255,255"; // Initial secondary pixel color
     var hiresLimits = true; // Are hires limitation turned on?
     var ditherBrush = false;
     // Only the following pixelindexes will show up during pixelling if ditherBrush is set to true
@@ -207,6 +214,13 @@ $(document).ready(function(){
         var pixelIndexX = currentPixelCoordinates[0] - (currentCharCoordinates[0] * 8);
         var pixelIndexY = currentPixelCoordinates[1] - (currentCharCoordinates[1] * 8);
         var pixelIndex = pixelIndexX + (pixelIndexY * 8);
+        console.log(secondaryPixelColor);
+        if(event.which == 3){
+            pixelColor = secondaryPixelColor;
+        } else {
+            pixelColor = pixelColor
+        }
+        console.log(pixelColor);        
         // Hires limits apply if they're turned on, this will change eventually if I introduce multicolor graphics mode
         if(uniqueColors.length < 2 || pixelColor + ',255' == uniqueColors[0] || pixelColor + ',255' == uniqueColors[1] || hiresLimits == false) {
             // If ditherbrush is turned on, put pixels only on the indexes which are defined in the ditherBrush array
@@ -217,6 +231,9 @@ $(document).ready(function(){
         } else {
             colorChange(currentCharCoordinates, pixelIndex, pixelColor);
         }
+        // Reset colors
+        pixelColor = $('.color-indicators .left-click').data('rgb');
+        secondaryPixelColor = $('.color-indicators .right-click').data('rgb');
         refreshPreviewCanvas();
     }
 
@@ -341,7 +358,25 @@ $(document).ready(function(){
     $('#palette .color').on('click', function(){
         pixelColor = $(this).data('rgb');
         $('#palette .color').removeClass('active');
+        $('.color-indicators .left-click').css('background-color', 'rgba(' + pixelColor + ',255)');
+        $('.color-indicators .left-click').data('rgb', pixelColor);
         $(this).addClass('active');
+    });
+
+    // Set secondary (right click) color
+    $("#palette .color").mousedown(function(event){
+        if(event.which == 3){
+            secondaryPixelColor = $(this).data('rgb');
+            $('.color-indicators .right-click').css('background-color', 'rgba(' + secondaryPixelColor + ',255)');
+            $('.color-indicators .right-click').data('rgb', secondaryPixelColor);
+        }
+    });
+
+    $('#save-image').on('click', function(){
+        var canvas = document.getElementById("canvas");
+        var d = canvas.toDataURL("image/png");
+        var w = window.open('about:blank','image from canvas');
+        w.document.write("<img src='"+d+"' alt='from canvas'/>");
     });
 
 });
