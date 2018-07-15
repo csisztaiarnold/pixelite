@@ -10,44 +10,41 @@
 <div style="overflow: scroll" id="container">
     <div id="palette-container"><h1>Palette</h1><div class="color-container"><div id="palette"></div></div></div>
     <div id="options-container">
-        <h1>Settings</h1>
-        <label>Select an image:</label>
-        <select>
-            <option value="img1">Anima Et Animus</option>
-            <option value="img2">Joe's 136 Colors LSD Trip</option>
-            <option value="img3">Tamed</option>
-            <option value="img4">The King Lives!</option>
-            <option value="img5">Transcendence</option>
-        </select>
-        <div id="clear">Clear with selected color</div>
-        <label>X:</label>
-        <input id="coor-x" class="coordinates" type="text" value="" disabled />
-        <label>Y:</label>
-        <input id="coor-y" class="coordinates" type="text" value="" disabled />
-        <label>Char X:</label>
-        <input id="charcoor-x" class="coordinates" type="text" value="" disabled />
-        <label>Char Y:</label>
-        <input id="charcoor-y" class="coordinates" type="text" value="" disabled />        
-        <label>Zoom level:</label>
-        <input id="zoom-level" type="text" value="" disabled />
-        <label>Current colors in char:</label>
-        <div id="current-colors">
-            <div class="color color1"></div>
-            <div class="color color2"></div>
+        <h1>Settings / Info</h1>
+        <div class="infogroup"><input type="checkbox" id="hires-limit" checked> <label for="hires-limit">Hi-res Limitations</label></div>
+        <div class="infogroup"><label>X:</label> <span id="coor-x">0</span></div>
+        <div class="infogroup"><label>Y:</label> <span id="coor-y">0</span></div>
+        <div class="infogroup"><label>Char X:</label> <span id="charcoor-x">0</span></div>
+        <div class="infogroup"><label>Char Y:</label> <span id="charcoor-y">0</span></div>
+        <div class="infogroup"><label>Zoom level:</label> <span id="zoom-level">0</span></div>
+        <div class="infogroup current-colors-container">
+            <label>Current colors in char:</label>
+            <div id="current-colors">
+                <div class="color color1"></div>
+                <div class="color color2"></div>
+            </div>
         </div>
-        <label><strong>Help:</strong></label>
-        <ul>
-            <li>Move main canvas with cursor buttons or scrollbars</li>
-            <li>Mouseweel on canvas: zoom in/out</li>
-            <li>You could drag the modal windows to move them away</li>
-            <li>Click on preview window to activate, and then zoom in/out activated preview with mousewheel</li>
-            <li>Save with right click > Save As...</li>
-        </ul>
+        <div class="infogroup">
+            <label><strong>Help:</strong></label>
+            <ul>
+                <li>Move main canvas with cursor buttons or scrollbars</li>
+                <li>You could drag the modal windows to move them away</li>
+                <li>Click on preview window to activate, and then zoom in/out activated preview with mousewheel</li>
+                <li>Save with right click > Save As...</li>
+            </ul>
+        </div>
         <br />
-        Graphics by Arnold "Jailbird" Csisztai
+        Demopic by Arnold "Jailbird" Csisztai
+        <br />
+        <div id="clear">Clear canvas with selected color</div>
     </div>
     <div id="char-overlay"></div>
-    <canvas id="canvas" width="320" height="200" style="background-color: #000000; zoom: 12;"></canvas>
+    <div id="zoom">
+        <h1>Zoom 1:<span></span></h1>
+        <div class="zoom-option zoom-in">zoom in</div>
+        <div class="zoom-option zoom-out">zoom out</div>
+    </div>
+    <canvas id="canvas" width="320" height="200" style="background-color: #000000; zoom: 24;"></canvas>
     <div id="preview-canvas-container"><h1>Preview <span>1:<em>1</em></span></h1><canvas id="previewCanvas" width="320" height="200" style="background-color: #000000;"></canvas></div>
 </div>
 

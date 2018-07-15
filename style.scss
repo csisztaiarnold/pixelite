@@ -4,6 +4,15 @@ body {
     overflow: hidden;
     font-family: Arial, Helvetica, sans-serif;
 
+    * {
+        -webkit-touch-callout: none;
+        -webkit-user-select: none;
+        -khtml-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+    }
+
     canvas { 
         image-rendering: optimizeSpeed;             /* STOP SMOOTHING, GIVE ME SPEED  */
         image-rendering: -moz-crisp-edges;          /* Firefox                        */
@@ -37,9 +46,37 @@ body {
         font-size: 13px;
         color: #ddd;
         text-align: center;
+        cursor: move;
 
         span em {
             font-style: normal;
+        }
+    }
+
+    #zoom {
+        position: fixed;
+        top: 250px;
+        left: 220px;
+        z-index: 2500;
+        padding: 0 5px 5px 5px;
+        box-shadow: 0 0 5px #000;
+        background-color: #111;
+        border-radius: 2px;
+
+        .zoom-option {
+            background-color: #ddd;
+            color: #444;
+            font-size: 12px;
+            padding: 5px;
+            text-align: center;
+            display: block;
+            cursor: pointer;
+            border-radius: 2px;
+            margin-bottom: 5px;
+
+            &:hover {
+                background-color: #ccc; 
+            }
         }
     }
 
@@ -52,7 +89,6 @@ body {
         box-shadow: 0 0 5px #000;
         background-color: #111;
         border-radius: 2px;
-        cursor: move;    
 
         .color-container {
             display: block;
@@ -83,7 +119,6 @@ body {
         top: 10px;
         left: 10px;
         box-shadow: 0 0 5px #000;
-        cursor: move;
         z-index: 1000;
         border: 1px solid rgba(0,0,0,1);
 
@@ -100,7 +135,7 @@ body {
 
     #options-container {
         position: fixed;
-        top: 340px;
+        top: 360px;
         left: 10px;            
         padding: 0 5px 5px 5px;
         box-shadow: 0 0 5px #000;
@@ -108,15 +143,17 @@ body {
         border-radius: 2px;
         font-size: 11px;
         color: #777;  
-        cursor: move;   
         width: 200px;  
         z-index: 2000;
 
+        .infogroup {
+            padding-top: 5px;
+        }
+
         label {
-            display: block;
             padding-bottom: 5px;
-            padding-top: 10px;
             font-size: 12px;
+            font-weight: bold;
 
             &:first-child {
                 padding-top: 0;
@@ -131,16 +168,17 @@ body {
         #clear {
             clear: both;
             border-radius: 5px;
-            margin-top: 10px;
             cursor: pointer;
             background-color: #aa0000;
             color: #fff;
-            display: inline-block;
-            padding: 3px 5px 3px 5px;
+            display: block;
+            padding: 5px;
+            margin-top: 5px;
+            text-align: center;
         }
 
         ul {
-            padding: 0 0 0 20px;
+            padding: 5px 0 0 20px;
             margin: 0;
 
             li {
@@ -148,18 +186,12 @@ body {
             }
         }
 
-        #zoom-level, .coordinates {
-            border: 0;
-            background-color: #333;
-            color: #888;
-            width: 40px;
-            text-align: center;
-        }
     }
 
     #current-colors {
         display: block;
         overflow: auto;
+        padding-top: 5px;
 
         .color {
             width: 20px;

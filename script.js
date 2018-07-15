@@ -1,14 +1,14 @@
 $(document).ready(function(){
 
-    $("#preview-canvas-container, #palette-container, #options-container").draggable({
+    $("#preview-canvas-container, #palette-container, #options-container, #zoom").draggable({
         'handle': 'h1'
     });
-    
+
     var palette = [
         '0,0,0',
         '255,255,255',
         '103,55,43',
-        '112,164,168',
+        '112,164,178',
         '111,61,134',
         '88,141,67',
         '53,40,121',
@@ -26,21 +26,38 @@ $(document).ready(function(){
     var canvas = document.getElementById("canvas");
     var previewCanvas = document.getElementById("previewCanvas");
     var ctx = canvas.getContext("2d");
-    var zoomFactor = 12;
+    var zoomFactor = 24;
     var previewZoomFactor = 1;
     var previewZoomActive = false;
     var id = ctx.createImageData(1,1);
     var d = id.data;
     var down = false;
     var pixelColor = "0,0,0";
+    var hiresLimits = true;
 
-    // Zoom level indicator
-    $('#zoom-level').val(zoomFactor);
+    $("#hires-limit").on('change', function(){
+        if($(this).is(':checked')){
+            hiresLimits = true;
+            $('.current-colors-container').show();
+        }else{
+            hiresLimits = false; 
+            $('.current-colors-container').hide();
+        }
+    });
+
+    // Zoom level indicator init
+    $('#zoom-level, #zoom span').text(zoomFactor);
 
     // Adjust canvas side depending on window size
     $(window).on('resize load', function(){
         changeCanvasSize();
     });
+
+    // Center the image on window load
+    $(window).on('load', function(){
+        $('#container').scrollLeft((($('#canvas').width()*zoomFactor) - $(window).width()) / 2);
+        $('#container').scrollTop((($('#canvas').height()*zoomFactor) - $(window).height()) / 2);
+    });    
 
     function changeCanvasSize(){
         $('#container').css('width', $(window).width() + 'px').css('height', $(window).height() + 'px');
@@ -57,7 +74,7 @@ $(document).ready(function(){
 
     // Load an initial image into the background
     var img = new Image();
-    img.src = 'img1.png';
+    img.src = 'demopic.png';
     img.onload = function (){
         ctx.drawImage(img, 0, 0);
         refreshPreviewCanvas();
@@ -89,12 +106,12 @@ $(document).ready(function(){
         },
         mousemove : function(){
             var currentPixelCoordinates = returnCurrentPixelCoordinates(event);  
-            $('#coor-x').val(currentPixelCoordinates[0]);
-            $('#coor-y').val(currentPixelCoordinates[1]);
+            $('#coor-x').text(currentPixelCoordinates[0]);
+            $('#coor-y').text(currentPixelCoordinates[1]);
 
             var currentCharCoordinates = returnCurrentCharCoordinates(event);  
-            $('#charcoor-x').val(currentCharCoordinates[0] + 1);
-            $('#charcoor-y').val(currentCharCoordinates[1] + 1);                      
+            $('#charcoor-x').text(currentCharCoordinates[0] + 1);
+            $('#charcoor-y').text(currentCharCoordinates[1] + 1);                      
 
             // Place a char overlay on the current char
             $('#char-overlay').css('top', (currentCharCoordinates[1] * zoomFactor * 8) + 'px').css('left', (currentCharCoordinates[0] * zoomFactor * 8) + 'px').css('width', (zoomFactor * 8 - 1) + 'px').css('height', (zoomFactor * 8 - 1) + 'px');
@@ -156,8 +173,7 @@ $(document).ready(function(){
         var pixelIndexY = currentPixelCoordinates[1] - (currentCharCoordinates[1] * 8);
         var pixelIndex = pixelIndexX + (pixelIndexY * 8);
 
-        // Todo: color replacement
-        if(uniqueColors.length < 2 || pixelColor + ',255' == uniqueColors[0] || pixelColor + ',255' == uniqueColors[1]) {
+        if(uniqueColors.length < 2 || pixelColor + ',255' == uniqueColors[0] || pixelColor + ',255' == uniqueColors[1] || hiresLimits == false) {
             createPixel(currentPixelCoordinates[0], currentPixelCoordinates[1], pixelColor);
         } else {
             colorChange(currentCharCoordinates, pixelIndex, pixelColor);
@@ -229,11 +245,19 @@ $(document).ready(function(){
     }
 
     // Canvas Zoom
-    canvas.onmousewheel = function (event){
-        var wheel = event.wheelDelta/240;
-        $('#canvas').css('zoom', zoomFactor + wheel);
-        zoomFactor = zoomFactor + wheel;
-        $('#zoom-level').val(zoomFactor);
+    $('.zoom-option').on('click', function(){
+        if($(this).hasClass('zoom-in')){
+            zoomIndex = 4;
+        }else{
+            if(zoomFactor == 4){
+                zoomIndex = 0;
+            }else{
+                zoomIndex = -4;
+            }
+        }
+        $('#canvas').css('zoom', zoomFactor + zoomIndex );
+        zoomFactor = zoomFactor + zoomIndex ;
+        $('#zoom-level, #zoom span').text(zoomFactor);
         // Place a char overlay on the current char
         var currentCharCoordinates = returnCurrentCharCoordinates(event);  
         $('#char-overlay').css('top', (currentCharCoordinates[1] * zoomFactor * 8) + 'px').css('left', (currentCharCoordinates[0] * zoomFactor * 8) + 'px').css('width', (zoomFactor * 8 - 1) + 'px').css('height', (zoomFactor * 8 - 1) + 'px'); 
@@ -242,7 +266,7 @@ $(document).ready(function(){
         } else {
             $('#char-overlay').css('background', 'none');
         }
-    }
+    });
 
     // Activate-deactive preview window
     $('#previewCanvas').on("click",function(){
@@ -270,16 +294,6 @@ $(document).ready(function(){
         }
     });
 
-    // Disable vertical scroll on mousewheel so the zoom works fine
-    $(window).on("wheel mousewheel", function(event){
-        if(event.originalEvent.deltaY > 0) {
-            event.preventDefault();
-            return;
-        } else if (event.originalEvent.wheelDeltaY < 0) {
-            event.preventDefault();
-            return;
-        }    
-    });
 
     $('#palette .color').on('click', function(){
         pixelColor = $(this).data('rgb');
