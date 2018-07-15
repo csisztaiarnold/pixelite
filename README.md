@@ -1,4 +1,4 @@
-# Pixelite v0.1
+# Pixelite v0.1.2
 A Commodore 64 pixel editor made in HTML5/JS
 
 Thanks for JackAsser for the idea ;)
@@ -10,7 +10,8 @@ Currently it ~~is just a very early proof of concept~~ could function as a full-
 - grid (character indicator overlay is functioning, though)
 - ~~hires and~~ multicolor graphics modes
 - ~~hires and~~ multicolor color clash handling
-- undo
+- ~~undo~~ TODO: may be a bit buggy (not a bug actually, but undo state is saved even when putting down a pixel with the same exact color). Refactor, and limit buffer states
+- redo (?)
 - bigger canvas than 320x200
 - confirm on clearing screen
 - preview window locator overlay
@@ -45,6 +46,11 @@ http-server ./
 ~~~
 
 ## History
+
+### v0.1.2
+
+- A quite fast and memory friendly undo feature (invoked by CTRL+Z)
+- Brush shortcut (invoked by B)
 
 ### v0.1.1
 

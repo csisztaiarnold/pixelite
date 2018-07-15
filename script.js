@@ -62,19 +62,40 @@ $(document).ready(function(){
         40,   42,   44,   46,
            49,   51,   53,   55,
         56,   58,   60,   62
-    ];
+    ];undoStates
+    var bufferKey = 0; // For saving undo states
+    var undoStates = [];
+    var canvasWidth = 320;
+    var canvasHeight = 200;
+    var imgDataForSave;
 
     $('#brush_1').on('click', function(){
-        if($(this).hasClass('active')){
+        toggleDitherBrush($('#brush_1'));
+    });
+
+    function toggleDitherBrush(el){
+        if(el.hasClass('active')){
             ditherBrush = false;
             ditherBrushArray = [];
-            $(this).removeClass('active');
+            el.removeClass('active');
         }else{
             ditherBrush = true;
             ditherBrushArray = brush_1;
-            $(this).addClass('active');
+            el.addClass('active');
         }
-    });
+    }
+    
+    document.onkeyup = function(event) {
+        // Keypress b 
+        if(event.which == 66){
+            toggleDitherBrush($('#brush_1'))
+        }  
+
+        // CTRL+z
+        if(event.ctrlKey && event.which == 90) {
+           undo();
+        }        
+    };    
 
     // Set the initial zoom to the main canvas
     $('#canvas').css('zoom', zoomFactor); 
@@ -139,9 +160,11 @@ $(document).ready(function(){
         refreshPreviewCanvas();
     });
 
+
     // Mousevents
     $(canvas).bind({
         mousedown : function(){
+            imgDataForSave = ctx.getImageData(0,0,canvasWidth,canvasHeight);
             down = true;  
             drawPixel(event);
         },
@@ -169,6 +192,8 @@ $(document).ready(function(){
             refreshPreviewCanvas();
         },
         mouseup : function(){
+            // Save undo state
+            saveUndosState(imgDataForSave);
             down = false;
         }
     });
@@ -214,13 +239,11 @@ $(document).ready(function(){
         var pixelIndexX = currentPixelCoordinates[0] - (currentCharCoordinates[0] * 8);
         var pixelIndexY = currentPixelCoordinates[1] - (currentCharCoordinates[1] * 8);
         var pixelIndex = pixelIndexX + (pixelIndexY * 8);
-        console.log(secondaryPixelColor);
         if(event.which == 3){
             pixelColor = secondaryPixelColor;
         } else {
             pixelColor = pixelColor
         }
-        console.log(pixelColor);        
         // Hires limits apply if they're turned on, this will change eventually if I introduce multicolor graphics mode
         if(uniqueColors.length < 2 || pixelColor + ',255' == uniqueColors[0] || pixelColor + ',255' == uniqueColors[1] || hiresLimits == false) {
             // If ditherbrush is turned on, put pixels only on the indexes which are defined in the ditherBrush array
@@ -378,5 +401,21 @@ $(document).ready(function(){
         var w = window.open('about:blank','image from canvas');
         w.document.write("<img src='"+d+"' alt='from canvas'/>");
     });
+
+    // Save an undoState buffer
+    function saveUndosState(value) {
+       undoStates[bufferKey] = value;
+       bufferKey++;
+    }
+    
+    // Retreive an older state from the undoState buffer
+    function undo() {
+        var previousState = bufferKey-1;
+        imgData = undoStates[previousState];
+        ctx.putImageData(imgData,0,0);
+        if(bufferKey > 1) {
+            bufferKey = bufferKey - 1;
+        }
+    }
 
 });
