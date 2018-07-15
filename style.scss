@@ -129,7 +129,7 @@ body {
         }
     }
 
-    #previewCanvas.active {
+    #preview-canvas.active {
         border: 1px solid rgba(255,255,255,0.4);
     }
 
@@ -186,6 +186,19 @@ body {
             }
         }
 
+        .ditherbrush {
+            margin-top: 2px;
+            opacity: 0.3;
+            padding: 3px;
+            border: 1px solid #888;
+            cursor: pointer;
+            border-radius: 2px;
+            background-color: #000;
+
+            &.active {
+                opacity: 0.8;
+            }
+        }
     }
 
     #current-colors {

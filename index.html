@@ -5,6 +5,9 @@
     <script src="jquery-ui.min.js"></script>
     <script src="script.min.js"></script>
     <link rel="stylesheet" type="text/css" href="style.css">
+    <title>Pixelite - A Commodore 64 HTML5/JS pixel editor</title>
+    <meta property="og:title" content="Pixelite - A Commodore 64 HTML5/JS pixel editor" />
+    <meta property="og:image" content="https://pixelite.idevele.com/assets/cover.png" />
 </head>
 <body>
 <div style="overflow: scroll" id="container">
@@ -25,6 +28,10 @@
             </div>
         </div>
         <div class="infogroup">
+            <label>Dither brush:</label><br />
+            <img src="assets/brush_1.png" id="brush_1" class="ditherbrush" />
+        </div>        
+        <div class="infogroup">
             <label><strong>Help:</strong></label>
             <ul>
                 <li>Move main canvas with cursor buttons or scrollbars</li>
@@ -44,8 +51,8 @@
         <div class="zoom-option zoom-in">zoom in</div>
         <div class="zoom-option zoom-out">zoom out</div>
     </div>
-    <canvas id="canvas" width="320" height="200" style="background-color: #000000; zoom: 8;"></canvas>
-    <div id="preview-canvas-container"><h1>Preview <span>1:<em>1</em></span></h1><canvas id="previewCanvas" width="320" height="200" style="background-color: #000000;"></canvas></div>
+    <canvas id="canvas" width="320" height="200" style="background-color: #000000;"></canvas>
+    <div id="preview-canvas-container"><h1>Preview <span>1:<em>1</em></span></h1><canvas id="preview-canvas" width="320" height="200" style="background-color: #000000;"></canvas></div>
 </div>
 
 </body>
