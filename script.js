@@ -26,7 +26,7 @@ $(document).ready(function(){
     var canvas = document.getElementById("canvas");
     var previewCanvas = document.getElementById("previewCanvas");
     var ctx = canvas.getContext("2d");
-    var zoomFactor = 24;
+    var zoomFactor = 8;
     var previewZoomFactor = 1;
     var previewZoomActive = false;
     var id = ctx.createImageData(1,1);
