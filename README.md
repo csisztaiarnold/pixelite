@@ -10,14 +10,21 @@ Currently it ~~is just a very early proof of concept~~ could function as a full-
 - grid (character indicator overlay is functioning, though)
 - ~~hires~~ and multicolor color clash handling
 - undo
+- bigger canvas than 320x200
+- confirm on clearing screen
 - preview window locator overlay
 - better zoom handling
 - ~~hires~~ and multicolor graphics modes
 - import/export
 - ~~ditherbrushes~~ possibility
 - change color under cursor
-- keyboard shortcuts
+- (configurable) keyboard shortcuts
+- brush editor
 - only tested on Chrome yet
+
+## Preview current state
+
+https://pixelite.idevele.com
 
 ## Help
 
@@ -36,10 +43,6 @@ npm install http-server -g
 cd /home/Projects/pixelate
 http-server ./
 ~~~
-
-## Preview current state
-
-https://pixelite.idevele.com
 
 ## History
 

@@ -44,7 +44,7 @@ $(document).ready(function(){
     var pixelColor = "0,0,0"; // Initial pixel color
     var hiresLimits = true; // Are hires limitation turned on?
     var ditherBrush = false;
-    // Only the following pixelindexes will show up during pixelling
+    // Only the following pixelindexes will show up during pixelling if ditherBrush is set to true
     // TODO: (for the far future) brush editor
     var brush_1 = [
             1,    3,    5,    7, 
@@ -75,7 +75,7 @@ $(document).ready(function(){
     // Set the initial zoom to the main canvas
     $('#preview-canvas').css('zoom', previewZoomFactor); 
 
-    // Are the hi-res limitation turned on?
+    // Are the hi-res limitations turned on?
     // TODO: this will need refactoring once multicolor is introduced
     $("#hires-limit").on('change', function(){
         if($(this).is(':checked')){
