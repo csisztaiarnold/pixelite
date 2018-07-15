@@ -1,7 +1,9 @@
 # Pixelite v0.1
-A Commodore 64 pixel editor made in HTML/JS
+A Commodore 64 pixel editor made in HTML5/JS
 
 Thanks for JackAsser for the idea ;)
+
+![Pixelite](https://i.imgur.com/ymENzfl.png)
 
 Currently it ~~is just a very early proof of concept~~ could function as a full-fledged pixel editor for creating Commodore 64 hires images (320x200px, 2 colors per 8x8 char area). Still a lot to do!
 
