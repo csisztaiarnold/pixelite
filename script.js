@@ -1,6 +1,8 @@
 $(document).ready(function(){
 
-    $("#previewCanvas, #palette, #options-container").draggable();
+    $("#preview-canvas-container, #palette-container, #options-container").draggable({
+        'handle': 'h1'
+    });
     
     var palette = [
         '0,0,0',
@@ -260,9 +262,11 @@ $(document).ready(function(){
         if (previewZoomFactor + wheel > 1) {
             $('#previewCanvas').css('zoom', previewZoomFactor + 0.5);
             previewZoomFactor = previewZoomFactor + 0.5;
+            $('#preview-canvas-container h1 span em').text(previewZoomFactor);
         } else {
-            $('#previewCanvas').css('zoom', previewZoomFactor - 0.5);
-            previewZoomFactor = previewZoomFactor - 0.5;
+            $('#previewCanvas').css('zoom', 1);
+            previewZoomFactor = 1;
+            $('#preview-canvas-container h1 span em').text(previewZoomFactor);
         }
     });
 

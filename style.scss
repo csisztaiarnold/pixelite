@@ -1,6 +1,8 @@
 body {
     padding: 0;
     margin: 0;
+    overflow: hidden;
+    font-family: Arial, Helvetica, sans-serif;
 
     canvas { 
         image-rendering: optimizeSpeed;             /* STOP SMOOTHING, GIVE ME SPEED  */
@@ -28,44 +30,68 @@ body {
         overflow: scroll;
     }
 
-    #palette {
-        position: absolute;
-        top: 220px;
+    h1 {
+        padding: 5px 0 5px 0;
+        margin: 0;
+        background-color: #111;
+        font-size: 13px;
+        color: #ddd;
+        text-align: center;
+
+        span em {
+            font-style: normal;
+        }
+    }
+
+    #palette-container {
+        position: fixed;
+        top: 250px;
         left: 10px;
         z-index: 2000;
-        padding: 10px;
+        padding: 0 5px 5px 5px;
         box-shadow: 0 0 5px #000;
         background-color: #111;
         border-radius: 2px;
         cursor: move;    
 
-        .color {
-            width: 20px;
-            height: 20px;
+        .color-container {
             display: block;
-            float: left;
-            border: 1px solid rgba(0,0,0,1);
-            border-radius: 2px;    
-            cursor: pointer;     
-        }
+            overflow: auto;
 
-        .color.active {
-            border: 1px dashed rgba(255,140,97,1);
-        }
+            .color {
+                width: 20px;
+                height: 20px;
+                display: block;
+                float: left;
+                border: 1px solid rgba(0,0,0,1);
+                border-radius: 2px;    
+                cursor: pointer;     
+            }
 
-        .color:nth-child(9) {
-            clear:both;
+            .color.active {
+                border: 1px dashed rgba(255,140,97,1);
+            }
+
+            .color:nth-child(9) {
+                clear:both;
+            }
         }
     }
 
-    #previewCanvas {
-        position: absolute;
+    #preview-canvas-container {
+        position: fixed;
         top: 10px;
         left: 10px;
         box-shadow: 0 0 5px #000;
         cursor: move;
         z-index: 1000;
         border: 1px solid rgba(0,0,0,1);
+
+        canvas {
+            float: left;
+            padding: 0;
+            margin: 0;
+        }
     }
 
     #previewCanvas.active {
@@ -73,19 +99,19 @@ body {
     }
 
     #options-container {
-        position: absolute;
-        top: 300px;
+        position: fixed;
+        top: 340px;
         left: 10px;            
-        padding: 10px;
+        padding: 0 5px 5px 5px;
         box-shadow: 0 0 5px #000;
         background-color: #111;
         border-radius: 2px;
-        font-family: Arial, Helvetica, sans-serif;
         font-size: 11px;
         color: #777;  
         cursor: move;   
         width: 200px;  
-        
+        z-index: 2000;
+
         label {
             display: block;
             padding-bottom: 5px;

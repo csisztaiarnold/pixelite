@@ -8,8 +8,9 @@
 </head>
 <body>
 <div style="overflow: scroll" id="container">
-    <div id="palette"></div>
+    <div id="palette-container"><h1>Palette</h1><div class="color-container"><div id="palette"></div></div></div>
     <div id="options-container">
+        <h1>Settings</h1>
         <label>Select an image:</label>
         <select>
             <option value="img1">Anima Et Animus</option>
@@ -47,7 +48,7 @@
     </div>
     <div id="char-overlay"></div>
     <canvas id="canvas" width="320" height="200" style="background-color: #000000; zoom: 12;"></canvas>
-    <canvas id="previewCanvas" width="320" height="200" style="background-color: #000000;"></canvas>
+    <div id="preview-canvas-container"><h1>Preview <span>1:<em>1</em></span></h1><canvas id="previewCanvas" width="320" height="200" style="background-color: #000000;"></canvas></div>
 </div>
 
 </body>
