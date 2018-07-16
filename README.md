@@ -61,6 +61,7 @@ http-server ./
 - Plus/4 palette added, more palettes could be added by editing (and compiling) palettes.js
 - Canvas resize (make sure your new canvas dimensions are divisible by 8, otherwise it will be rounded to the nearest number divisible by 8)
 - Bugfix: preview window wasn't updating on undo
+- Confirmation dialogs added for clearing and resizing the canvas
 
 ### v0.1.2
 
