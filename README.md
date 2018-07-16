@@ -9,6 +9,8 @@ Thanks for Andreas "JackAsser" Larsson for the idea ;)
 
 Currently it ~~is just a very early proof of concept~~ could function as a full-fledged pixel editor for creating Commodore 64 hires images (320x200px, **2 possible colors per 8x8 char area from a fixed 16 color palette**). Still a lot to do!
 
+Note: **doesn't work on Firefox yet**, only tested on Chrome (it should also work on webkit derivates like Opera or Vivaldi)
+
 - grid (character indicator overlay is functioning, though)
 - ~~hires and~~ multicolor graphics modes
 - ~~hires and~~ multicolor color clash handling
@@ -19,7 +21,7 @@ Currently it ~~is just a very early proof of concept~~ could function as a full-
 - preview window locator overlay
 - better zoom handling
 - import/export
-- ~~ditherbrushe functionality~~ TODO: invert brush, more brushes
+- ~~ditherbrush functionality~~ TODO: invert brush, more brushes
 - change color under cursor
 - color picker
 - (configurable) keyboard shortcuts
