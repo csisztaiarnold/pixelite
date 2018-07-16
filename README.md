@@ -1,5 +1,5 @@
-# Pixelite v0.1.2
-A Commodore 64 pixel editor made in HTML5/JS
+# Pixelite v0.1.3
+A Commodore 64 & Commodore Plus/4 pixel editor made in HTML5/JS
 
 https://pixelite.idevele.com
 
@@ -7,7 +7,7 @@ Thanks for Andreas "JackAsser" Larsson for the idea ;)
 
 ![Pixelite](https://i.imgur.com/ymENzfl.png)
 
-Currently it ~~is just a very early proof of concept~~ could function as a full-fledged pixel editor for creating Commodore 64 hires images (320x200px, **2 possible colors per 8x8 char area from a fixed 16 color palette**). Still a lot to do!
+A pixel editor for creating Commodore 64 and Commodore Plus/4 hires images (320x200px, **2 possible colors per 8x8 char area from a fixed 16 color palette**). Still a lot to do!
 
 Note: **doesn't work on Firefox yet**, only tested on Chrome (it should also work on webkit derivates like Opera or Vivaldi)
 
@@ -23,11 +23,13 @@ Note: **doesn't work on Firefox yet**, only tested on Chrome (it should also wor
 - import/export
 - ~~ditherbrush functionality~~ TODO: invert brush, more brushes
 - change color under cursor
+- copy/paste blocks
+- clear a block with selected color
 - color picker
 - (configurable) keyboard shortcuts
 - brush editor
-- Commodore Plus/4 palette
-- ZX Spectrum palette/resolution
+- ~~Commodore Plus/4 palette~~
+- ZX Spectrum palette/resolution/color handling
 - only tested on Chrome yet
 
 ## Help
@@ -39,6 +41,7 @@ Note: **doesn't work on Firefox yet**, only tested on Chrome (it should also wor
 - Save with clicking on the floppy icon (the image will be opened in a new tab)
 - Undo shortcut: ctrl+z
 - Brush shortcut: b
+- Canvas dimensions **must** be divisible by 8, otherwise the numbers will be rounded
 
 ## Running locally
 
@@ -51,6 +54,13 @@ http-server ./
 ~~~
 
 ## History
+
+### v0.1.3
+
+- Multipalette function
+- Plus/4 palette added, more palettes could be added by editing (and compiling) palettes.js
+- Canvas resize (make sure your new canvas dimensions are divisible by 8, otherwise it will be rounded to the nearest number divisible by 8)
+- Bugfix: preview window wasn't updating on undo
 
 ### v0.1.2
 

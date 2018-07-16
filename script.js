@@ -41,12 +41,47 @@ $(document).ready(function(){
         40,   42,   44,   46,
            49,   51,   53,   55,
         56,   58,   60,   62
-    ];undoStates
+    ];
     var bufferKey = 0; // For saving undo states
     var undoStates = [];
     var canvasWidth = 320;
     var canvasHeight = 200;
     var imgDataForSave;
+
+    $('#canvas').attr('width', canvasWidth).attr('height', canvasHeight);
+    $('#preview-canvas').attr('width', canvasWidth).attr('height', canvasHeight);
+
+    // Resize canvas
+    $('#canvas-resize').on('click', function(){
+        if(confirm('Are you sure you want to resize the canvas? This can\t be undone!')) {
+            // Copy current state of canvas
+            var imgDataBeforeResize = ctx.getImageData(0,0,canvasWidth,canvasHeight);
+            // Clear canvas
+            ctx.save();
+            ctx.setTransform(1, 0, 0, 1, 0, 0);       
+            ctx.clearRect(0,0,canvasWidth,canvasHeight);  
+            canvasWidth = $('#canvas-size-x').val();
+            canvasHeight = $('#canvas-size-y').val();
+            if(canvasWidth % 8 != 0) {
+                canvasWidth = Math.round(canvasWidth / 8) * 8;
+            }
+            if(canvasHeight % 8 != 0) {
+                canvasHeight = Math.round(canvasHeight / 8) * 8;
+            }   
+            $('#canvas-size-x').val(canvasWidth);
+            $('#canvas-size-y').val(canvasHeight);
+            $('#canvas').attr('width', canvasWidth).attr('height', canvasHeight);
+            $('#preview-canvas').attr('width', canvasWidth).attr('height', canvasHeight);
+            // Fill the resized part with the current selected color
+            ctx.fillStyle = 'rgba(' + $('.left-click').data('rgb') + ',1)';
+            ctx.fillRect(0,0,canvasWidth,canvasHeight); 
+            ctx.restore();
+            refreshPreviewCanvas();              
+            // Put back image data before resize
+            ctx.putImageData(imgDataBeforeResize,0,0);
+            refreshPreviewCanvas();
+        }
+    });
 
     $('#brush_1').on('click', function(){
         toggleDitherBrush($('#brush_1'));
@@ -73,6 +108,7 @@ $(document).ready(function(){
         // CTRL+z
         if(event.ctrlKey && event.which == 90) {
            undo();
+           refreshPreviewCanvas();
         }        
     };    
 
@@ -145,15 +181,16 @@ $(document).ready(function(){
 
     // Clear the canvas
     $('#clear').on('click', function(){
-        ctx.save();
-        ctx.setTransform(1, 0, 0, 1, 0, 0);
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-        ctx.fillStyle = 'rgba(' + pixelColor + ',1)';
-        ctx.fillRect(0,0,canvas.width,canvas.height);        
-        ctx.restore();
-        refreshPreviewCanvas();
+        if(confirm('Are you sure you want to clear the canvas? This can\'t be undone!')) {
+            ctx.save();
+            ctx.setTransform(1, 0, 0, 1, 0, 0);
+            ctx.clearRect(0, 0, canvasWidth, canvasHeight);
+            ctx.fillStyle = 'rgba(' + pixelColor + ',1)';
+            ctx.fillRect(0,0,canvasWidth,canvasHeight);        
+            ctx.restore();
+            refreshPreviewCanvas();
+        }
     });
-
 
     // Mousevents
     $(canvas).bind({

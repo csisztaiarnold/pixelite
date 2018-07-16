@@ -203,6 +203,8 @@ body {
 
         .infogroup {
             padding-top: 5px;
+            clear: both;
+            overflow: auto;
         }
 
         label {
@@ -238,6 +240,30 @@ body {
 
             li {
                 padding-bottom: 5px;
+            }
+        }
+
+        .canvas-size {
+            input {
+                float:left;
+            }
+
+            input {
+                border: 0;
+                background-color: #333;
+                border-bottom: 1px solid #555;
+                border-right: 1px solid #555;
+                border-radius: 2px;
+                width: 50px;
+                margin-right: 5px;
+                color: #888;
+            }
+
+            input.button {
+                border: 0;
+                background-color: #aa0000;
+                color: #fff;
+                cursor: pointer;
             }
         }
 

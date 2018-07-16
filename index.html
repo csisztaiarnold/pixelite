@@ -40,14 +40,23 @@
         <div class="infogroup">
             <label>Dither brush:</label><br />
             <img src="assets/brush_1.png" id="brush_1" class="ditherbrush" />
-        </div>        
+        </div>   
+        <div class="infogroup canvas-size">
+            <label>Resize canvas:</label><br />
+            <input id="canvas-size-x" class="coor" value="320" />
+            <input id="canvas-size-y" class="coor" value="200" />
+            <input type="button" id="canvas-resize" class="button" value="OK" />
+        </div>     
         <div class="infogroup">
             <label><strong>Help:</strong></label>
             <ul>
-                <li>Move main canvas with cursor buttons or scrollbars</li>
-                <li>You could drag the modal windows to move them away</li>
-                <li>Click on preview window to activate, and then zoom in/out activated preview with mousewheel</li>
-                <li>Save with the floppy icon (image opens in new tab)</li>
+                <li>Move main canvas with cursor buttons</li>
+                <li>Drag any window to move</li>
+                <li>Zoom in/out preview window with mousewheel</li>
+                <li>Save with clicking on the floppy icon (the image will be opened in a new tab)</li>
+                <li>Undo shortcut: ctrl+z</li>
+                <li>Brush shortcut: b</li>
+                <li>Canvas dimensions <strong>must</strong> be divisible by 8, otherwise the numbers will be rounded</li>
             </ul>
         </div>
         <br />
@@ -61,8 +70,8 @@
         <div class="zoom-option zoom-in">zoom in</div>
         <div class="zoom-option zoom-out">zoom out</div>
     </div>
-    <canvas id="canvas" width="320" height="200" style="background-color: #000000;"></canvas>
-    <div id="preview-canvas-container"><h1>Preview <span>1:<em>1</em></span></h1><canvas id="preview-canvas" width="320" height="200" style="background-color: #000000;"></canvas></div>
+    <canvas id="canvas" style="background-color: #000000;"></canvas>
+    <div id="preview-canvas-container"><h1>Preview <span>1:<em>1</em></span></h1><canvas id="preview-canvas" style="background-color: #000000;"></canvas></div>
 </div>
 
 </body>
