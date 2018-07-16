@@ -7,7 +7,7 @@ Thanks for Andreas "JackAsser" Larsson for the idea ;)
 
 ![Pixelite](https://i.imgur.com/ymENzfl.png)
 
-A pixel editor for creating Commodore 64 and Commodore Plus/4 hires images (320x200px, **2 possible colors per 8x8 char area from a fixed 16 color palette**). Still a lot to do!
+A pixel editor for creating Commodore 64 and Commodore Plus/4 hires images (320x200px, **2 possible colors per 8x8 char area**). Still a lot to do!
 
 Note: **doesn't work on Firefox yet**, only tested on Chrome (it should also work on webkit derivates like Opera or Vivaldi)
 
@@ -45,7 +45,7 @@ Note: **doesn't work on Firefox yet**, only tested on Chrome (it should also wor
 
 ## Running locally
 
-Since Chrome has some cross-origin issue if index.html is simply loaded into the browser, the best way to running the app locally is to run it in a server. For me, the easiest way was to install to run NodeJS's http-server and run it from the root of the project. So something like this, assuming NodeJS (and npm) is already installed:
+Since Chrome has a cross-origin issue if index.html is simply loaded into the browser, the best way to running the app locally is to run it in a server. For me, the easiest way was to install to run NodeJS's http-server and run it from the root of the project. So something like this, assuming NodeJS (and npm) is already installed:
 
 ~~~
 npm install http-server -g
