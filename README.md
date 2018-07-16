@@ -16,8 +16,8 @@ Note: **doesn't work on Firefox yet**, only tested on Chrome (it should also wor
 - ~~hires and~~ multicolor color clash handling
 - ~~undo~~ TODO: may be a bit buggy (not a bug actually, but undo state is saved even when putting down a pixel with the same exact color). Refactor, and limit buffer states
 - redo (?)
-- bigger canvas than 320x200
-- confirm on clearing screen
+- ~~bigger canvas than 320x200~~
+- ~~confirm on clearing screen~~
 - preview window locator overlay
 - better zoom handling
 - import/export
