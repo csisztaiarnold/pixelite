@@ -1,11 +1,12 @@
 # Pixelite v0.1.2
 A Commodore 64 pixel editor made in HTML5/JS
+https://pixelite.idevele.com
 
-Thanks for JackAsser for the idea ;)
+Thanks for Andreas "JackAsser" Larsson for the idea ;)
 
 ![Pixelite](https://i.imgur.com/ymENzfl.png)
 
-Currently it ~~is just a very early proof of concept~~ could function as a full-fledged pixel editor for creating Commodore 64 hires images (320x200px, 2 colors per 8x8 char area). Still a lot to do!
+Currently it ~~is just a very early proof of concept~~ could function as a full-fledged pixel editor for creating Commodore 64 hires images (320x200px, **2 possible colors per 8x8 char area from a fixed 16 color palette**). Still a lot to do!
 
 - grid (character indicator overlay is functioning, though)
 - ~~hires and~~ multicolor graphics modes
@@ -17,23 +18,24 @@ Currently it ~~is just a very early proof of concept~~ could function as a full-
 - preview window locator overlay
 - better zoom handling
 - import/export
-- ~~ditherbrushes~~ possibility
+- ~~ditherbrushe functionality~~ TODO: invert brush, more brushes
 - change color under cursor
+- color picker
 - (configurable) keyboard shortcuts
 - brush editor
+- Commodore Plus/4 palette
+- ZX Spectrum palette/resolution
 - only tested on Chrome yet
-
-## Preview current state
-
-https://pixelite.idevele.com
 
 ## Help
 
 - Move main canvas with cursor buttons
 - Drag any window to move
-- Click on preview window to activate
-- Zoom in/out activated preview with mousewheel
-- Save with right click > Save As...
+- Click on preview window to activate (currently this has no use, will be refactored)
+- Zoom in/out activated preview with mousewheel (currently this has no use, will be refactored)
+- Save with clicking on the floppy icon (the image will be opened in a new tab)
+- Undo shortcut: ctrl+z
+- Brush shortcut: b
 
 ## Running locally
 
@@ -49,8 +51,8 @@ http-server ./
 
 ### v0.1.2
 
-- A quite fast and memory friendly undo feature (invoked by CTRL+Z)
-- Brush shortcut (invoked by B)
+- A quite fast and memory friendly undo feature (invoked by pressing key combinations ctrl+z)
+- Brush shortcut (invoked by pressing key B)
 
 ### v0.1.1
 
