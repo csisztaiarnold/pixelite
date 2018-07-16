@@ -91,6 +91,19 @@ body {
         border-radius: 2px;
         padding: 0 5px 5px 5px;
 
+            #palette-selector {
+                margin: 0 0 5px 0;
+                text-align: center;
+            }
+
+            .palette-table {
+                display: none;
+
+                &.active {
+                    display: block;
+                }
+            }
+
             .color-container {
                 display: block;
                 float: left;
@@ -109,11 +122,11 @@ body {
                     border: 1px dashed rgba(255,140,97,1);
                 }
 
-                .color:nth-child(9) {
+                .color:nth-child(9n) {
                     clear:both;
                 }
             }
-        
+
             .color-indicators {
                 position: relative;
                 float: left;
@@ -177,8 +190,8 @@ body {
 
     #options-container {
         position: fixed;
-        top: 360px;
-        left: 10px;            
+        top: 10px;
+        right: 30px;            
         padding: 0 5px 5px 5px;
         box-shadow: 0 0 5px #000;
         background-color: #111;

@@ -17,27 +17,6 @@ $(document).ready(function(){
         'handle': 'h1'
     });
 
-    // Basic good old Pepto palette from Project One
-    // TODO: add more palette configs
-    var palette = [
-        '0,0,0',
-        '255,255,255',
-        '103,55,43',
-        '112,164,178',
-        '111,61,134',
-        '88,141,67',
-        '53,40,121',
-        '184,199,111',
-        '111,79,37',
-        '67,57,0',
-        '154,103,89',
-        '68,68,68',
-        '108,108,108',
-        '154,210,132',
-        '108,94,181',
-        '149,149,149'
-    ];
-
     var canvas = document.getElementById("canvas"); // Main canvas
     var previewCanvas = document.getElementById("preview-canvas"); // Preview window canvas
     var ctx = canvas.getContext("2d"); // The context
@@ -134,12 +113,27 @@ $(document).ready(function(){
     }
 
     // Create the color palette div based on the current palette array
-    var i;
+    var i = 1;
     var paletteHtml = '';
-    for (i = 0; i < palette.length; ++i){
-        paletteHtml += '<div class="color' + (i == 0 ? " active" : "" ) + '" data-rgb="' + palette[i] + '" style="background-color: rgba(' + palette[i] + ',1)"></div>';
+    var paletteSelector = '<select id="palette-change">';
+    for (var key in palette){
+      var p;
+      paletteSelector += '<option value="palette_' + i + '">' + key + '</option>';
+      paletteHtml += '<div class="palette-table palette_' + i + (i == 1 ? " active" : "" ) + '">';
+      for(p = 0; p < palette[key].length; p++) {
+        paletteHtml += '<div class="color' + (i == 0 ? " active" : "" ) + '" data-rgb="' + palette[key][p] + '" style="background-color: rgba(' + palette[key][p] + ',1)"></div>';
+      }
+      paletteHtml += '</div>';
+      i++;
     }
+    paletteSelector += '</select>';
+    $('#palette-selector').append(paletteSelector);
     $('#palette').append(paletteHtml);
+
+    $('#palette-change').on('change', function(){
+        $('.palette-table').removeClass('active');
+        $('.' + $(this).val()).addClass('active');
+    });
 
     // Load an initial image into the background
     var img = new Image();
@@ -395,6 +389,7 @@ $(document).ready(function(){
         }
     });
 
+    // Save the picture (a quite naive solution, this should be rewritten later)
     $('#save-image').on('click', function(){
         var canvas = document.getElementById("canvas");
         var d = canvas.toDataURL("image/png");
