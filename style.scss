@@ -23,6 +23,10 @@ body {
         -ms-interpolation-mode: nearest-neighbor;   /* IE8+                           */
     }
 
+    #canvas {
+        transform-origin: 0 0;
+    }
+
     #char-overlay {
         position: absolute;
         z-index: 500;

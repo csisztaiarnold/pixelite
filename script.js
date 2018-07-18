@@ -53,7 +53,7 @@ $(document).ready(function(){
 
     // Resize canvas
     $('#canvas-resize').on('click', function(){
-        if(confirm('Are you sure you want to resize the canvas? This can\t be undone!')) {
+        if(confirm('Are you sure you want to resize the canvas? This can\'t be undone!')) {
             // Copy current state of canvas
             var imgDataBeforeResize = ctx.getImageData(0,0,canvasWidth,canvasHeight);
             // Clear canvas
@@ -113,10 +113,10 @@ $(document).ready(function(){
     };    
 
     // Set the initial zoom to the main canvas
-    $('#canvas').css('zoom', zoomFactor); 
+    $('#canvas').css('zoom', zoomFactor).css('-moz-transform', 'scale(' + zoomFactor + ')'); 
 
     // Set the initial zoom to the main canvas
-    $('#preview-canvas').css('zoom', previewZoomFactor); 
+    $('#preview-canvas').css('zoom', previewZoomFactor).css('-moz-transform', 'scale(' + previewZoomFactor + ')'); 
 
     // Are the hi-res limitations turned on?
     // TODO: this will need refactoring once multicolor is introduced
@@ -194,12 +194,12 @@ $(document).ready(function(){
 
     // Mousevents
     $(canvas).bind({
-        mousedown : function(){
+        mousedown : function(event){
             imgDataForSave = ctx.getImageData(0,0,canvasWidth,canvasHeight);
             down = true;  
             drawPixel(event);
         },
-        mousemove : function(){ 
+        mousemove : function(event){ 
             var currentPixelCoordinates = returnCurrentPixelCoordinates(event);  
             $('#coor-x').text(currentPixelCoordinates[0]);
             $('#coor-y').text(currentPixelCoordinates[1]);
@@ -222,7 +222,7 @@ $(document).ready(function(){
             drawPixel(event);
             refreshPreviewCanvas();
         },
-        mouseup : function(){
+        mouseup : function(event){
             // Save undo state
             saveUndosState(imgDataForSave);
             down = false;
@@ -358,7 +358,7 @@ $(document).ready(function(){
 
     // Canvas Zoom (scrollwheel zoom was removed till I think of a better way of handling it)
     // TODO: keyboard shortcut, zooming proportionally from the center of the current viewport
-    $('.zoom-option').on('click', function(){
+    $('.zoom-option').on('click', function(event){
         if($(this).hasClass('zoom-in')){
             zoomIndex = 4;
         }else{
@@ -368,7 +368,7 @@ $(document).ready(function(){
                 zoomIndex = -4;
             }
         }
-        $('#canvas').css('zoom', zoomFactor + zoomIndex );
+        $('#canvas').css('zoom', zoomFactor + zoomIndex ).css('-moz-transform', 'scale(' + (zoomFactor + zoomIndex) + ')');
         zoomFactor = zoomFactor + zoomIndex ;
         $('#zoom-level, #zoom span').text(zoomFactor);
         // Place a char overlay on the current char
@@ -398,11 +398,11 @@ $(document).ready(function(){
     $('#preview-canvas').bind('mousewheel', function(event){
         var wheel = event.originalEvent.wheelDelta;
         if (previewZoomFactor + wheel > 1) {
-            $(this).css('zoom', previewZoomFactor + 0.5);
+            $(this).css('zoom', previewZoomFactor + 0.5).css('-moz-transform', 'scale(' + (previewZoomFactor + 0.5) + ')');
             previewZoomFactor = previewZoomFactor + 0.5;
             $('#preview-canvas-container h1 span em').text(previewZoomFactor);
         } else {
-            $(this).css('zoom', 1);
+            $(this).css('zoom', 1).css('-moz-transform', 'scale(1)');
             previewZoomFactor = 1;
             $('#preview-canvas-container h1 span em').text(previewZoomFactor);
         }
