@@ -192,6 +192,23 @@ $(document).ready(function(){
         }
     });
 
+    // Calculates the current location of the screen and places an overlay over the preview window
+    function moveZoomIndicator(){
+        startX = Math.floor($('#container').scrollLeft() / zoomFactor);
+        startY = Math.floor($('#container').scrollTop() / zoomFactor);
+        endX = Math.floor($(window).width() / zoomFactor) + startX;
+        endY = Math.floor($(window).height() / zoomFactor) + startY
+        $('.locator').css('top', startY*previewZoomFactor+25).css('left', startX*previewZoomFactor).css('width', (endX - startX)*previewZoomFactor).css('height', (endY - startY)*previewZoomFactor);
+    }
+
+    $(window).on('load resize', function() {
+        moveZoomIndicator();
+    });
+
+    $('#container').on('scroll', function() {
+        moveZoomIndicator();
+    });
+
     // Mousevents
     $(canvas).bind({
         mousedown : function(event){
@@ -406,6 +423,7 @@ $(document).ready(function(){
             previewZoomFactor = 1;
             $('#preview-canvas-container h1 span em').text(previewZoomFactor);
         }
+        moveZoomIndicator();
     });
 
     // Visual clue for the current color

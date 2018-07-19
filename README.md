@@ -1,4 +1,4 @@
-# Pixelite v0.1.3
+# Pixelite v0.1.4
 A Commodore 64 & Commodore Plus/4 pixel editor made in HTML5/JS
 
 https://pixelite.idevele.com
@@ -18,7 +18,7 @@ Note: **doesn't work on Firefox yet**, only tested on Chrome (it should also wor
 - redo (?)
 - ~~bigger canvas than 320x200~~
 - ~~confirm on clearing screen~~
-- preview window locator overlay
+- ~~preview window locator overlay~~ TODO: draggable preview window locator 
 - better zoom handling
 - import/export
 - ~~ditherbrush functionality~~ TODO: invert brush, more brushes
@@ -30,7 +30,7 @@ Note: **doesn't work on Firefox yet**, only tested on Chrome (it should also wor
 - brush editor
 - ~~Commodore Plus/4 palette~~
 - ZX Spectrum palette/resolution/color handling
-- only tested on Chrome yet
+- Edge fixes (currently only tested on Chrome and Firefox)
 
 ## Help
 
@@ -54,6 +54,12 @@ http-server ./
 ~~~
 
 ## History
+
+### v0.1.4
+
+- Everything works as intended in Firefox as well
+- Preview window locator overlay
+- Plus/4 palette fix (thanks [iszell](https://github.com/iszell)!)
 
 ### v0.1.3
 
