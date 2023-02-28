@@ -1,6 +1,8 @@
 # Pixelite v0.1.4
 A Commodore 64 & Commodore Plus/4 pixel editor made in HTML5/JS
 
+Live version: https://jailbird.hu/pixelite/
+
 Thanks for Andreas "JackAsser" Larsson for the idea ;)
 
 ![Pixelite](https://i.imgur.com/ymENzfl.png)
